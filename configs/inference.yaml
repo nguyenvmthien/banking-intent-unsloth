@@ -1,0 +1,5 @@
+# Inference Configuration
+model_path: "../outputs/checkpoint"
+max_seq_length: 256
+load_in_4bit: true
+max_new_tokens: 32 # Maximum tokens to generate for the intent text
