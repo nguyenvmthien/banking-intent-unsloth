@@ -1,2 +1,8 @@
 desktop.ini
 .venv
+*.pt
+*.env
+*.csv
+outputs
+huggingface_tokenizers_cache
+unsloth_compiled_cache
