@@ -29,9 +29,9 @@ def main():
     print(f"Original Train size: {len(train_df)}")
     print(f"Original Test size: {len(test_df)}")
     
-    # Sample 10% of the data to keep training exceptionally fast for the assignment
-    sampled_train = sample_dataset(train_df, test_size=0.10)
-    sampled_test = sample_dataset(test_df, test_size=0.10)
+    # Using 100% of the data as requested
+    sampled_train = train_df
+    sampled_test = test_df
     
     print(f"Sampled Train size: {len(sampled_train)}")
     print(f"Sampled Test size: {len(sampled_test)}")

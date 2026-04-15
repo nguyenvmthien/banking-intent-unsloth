@@ -1,3 +1,4 @@
+import os
 import yaml
 from unsloth import FastLanguageModel
 
@@ -13,25 +14,32 @@ Classify the intent of the following banking customer request.
 """
 
 class IntentClassification:
-    def __init__(self, model_path):
-        # Determine path to inference.yaml
-        # For simplicity, if model_path points directly to the config, we load it.
-        # Otherwise, load default configs/inference.yaml
-        if model_path.endswith('.yaml'):
-            with open(model_path, 'r') as f:
-                self.config = yaml.safe_load(f)
-            actual_model_path = self.config['model_path']
-        else:
-            # Fallback path if string is just directory
-            actual_model_path = model_path
-            # Provide sensible defaults
-            self.config = {
-                'max_seq_length': 256,
-                'load_in_4bit': True,
-                'max_new_tokens': 32
-            }
+    def __init__(self, config_path, base_only=False):
+        """
+        Required: config_path must point to a configuration YAML file.
+        base_only: If True, loads the original model without PEFT adapters.
+        """
+        if not config_path.endswith('.yaml'):
+            raise ValueError(f"Requirement Error: config_path must be a .yaml file. Got: {config_path}")
             
-        print(f"Loading model checkpoint from {actual_model_path}...")
+        if not os.path.exists(config_path):
+            # Try to resolve relative to root if script is run from different folder
+            alt_path = os.path.join("..", config_path)
+            if os.path.exists(alt_path):
+                config_path = alt_path
+            else:
+                raise FileNotFoundError(f"Config file not found: {config_path}")
+
+        with open(config_path, 'r') as f:
+            self.config = yaml.safe_load(f)
+            
+        # Use model_name for base comparison, or model_path for loaded adapters
+        actual_model_path = self.config.get('model_name') if base_only else self.config.get('model_path')
+        
+        if not actual_model_path:
+            raise KeyError(f"Config file must contain {'model_name' if base_only else 'model_path'}")
+            
+        print(f"Loading {'BASE' if base_only else 'FINE-TUNED'} model from {actual_model_path}...")
         self.model, self.tokenizer = FastLanguageModel.from_pretrained(
             model_name = actual_model_path,
             max_seq_length = self.config['max_seq_length'],

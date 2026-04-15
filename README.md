@@ -9,7 +9,9 @@ banking-intent-unsloth
 |-- scripts
 |   |-- train.py                 # Uses Unsloth to fine tune Llama-3
 |   |-- inference.py             # Inference loop using the class
-|   |-- preprocess_data.py       # Datset split logic
+|   |-- evaluate.py              # Evaluates accuracy (supports --base comparison)
+|   |-- preprocess_data.py       # Dataset split logic
+|   |-- presentation_script.md   # Script for video demonstration
 |-- configs
 |   |-- train.yaml               # Hyperparameters for training
 |   |-- inference.yaml           # Hyperparameters for inference
@@ -51,6 +53,23 @@ Run training with:
 ```bash
 sh train.sh
 ```
+
+### Hyperparameters Documentation
+
+As required by the assignment, the following hyperparameters are configured in `configs/train.yaml`:
+
+- **Model**: `Llama-3-8B-Instruct-bnb-4bit` (Unsloth)
+- **Batch Size**: 2
+- **Gradient Accumulation Steps**: 4
+- **Learning Rate**: 2e-4
+- **Optimizer**: `adamw_8bit` (Paged AdamW)
+- **Training Steps**: 60 (Max)
+- **Max Sequence Length**: 256
+- **LoRA Rank (r)**: 16
+- **LoRA Alpha**: 16
+- **LoRA Dropout**: 0
+- **Weight Decay**: 0.01
+- **LR Scheduler**: `linear`
 or 
 ```bash
 cd scripts
@@ -65,6 +84,20 @@ Run the test inference logic:
 ```bash
 sh inference.sh
 ```
+
+### 4. Evaluation (Accuracy Calculation)
+
+To fulfill the assignment requirement for the final accuracy on the test set **and compare performance**, run the evaluation script:
+
+```bash
+# 1. Evaluate the Base model (Zero-shot comparison)
+python scripts/evaluate.py --base
+
+# 2. Evaluate your Fine-tuned model
+python scripts/evaluate.py
+```
+
+This will process the 308 sampled test messages and produce a detailed classification report and the overall accuracy percentage.
 
 Because Unsloth uses Generative AI inference natively, it structures the input using a special instruction prompt template (found in `inference.py`) and allows the LLM to write out the explicit intent mapping.
 

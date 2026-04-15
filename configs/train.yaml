@@ -15,7 +15,7 @@ data_path: "../sample_data/train.csv"
 learning_rate: 2.0e-4
 batch_size: 2
 gradient_accumulation_steps: 4
-max_steps: 60 # Using max steps for a quick demonstration; change to num_train_epochs: 1 for full training
+num_train_epochs: 1
 optimizer: "adamw_8bit"
 weight_decay: 0.01
 lr_scheduler_type: "linear"

@@ -5,3 +5,4 @@
 outputs
 huggingface_tokenizers_cache
 unsloth_compiled_cache
+presentation_script.md
