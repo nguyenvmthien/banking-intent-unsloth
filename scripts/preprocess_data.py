@@ -14,8 +14,9 @@ def sample_dataset(df, test_size=0.1, random_state=42):
         return sampled_df
 
 def main():
-    print("Loading BANKING77 dataset from Hugging Face...")
-    dataset = load_dataset("PolyAI/banking77", trust_remote_code=True)
+    print("Loading BANKING77 dataset from Hugging Face (PolyAI/banking77)...")
+    # Using the original source as required by the assignment
+    dataset = load_dataset("PolyAI/banking77")
     
     # Convert to pandas
     train_df = dataset['train'].to_pandas()
