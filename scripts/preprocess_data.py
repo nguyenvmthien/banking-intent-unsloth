@@ -15,7 +15,7 @@ def sample_dataset(df, test_size=0.1, random_state=42):
 
 def main():
     print("Loading BANKING77 dataset from Hugging Face...")
-    dataset = load_dataset("PolyAI/banking77")
+    dataset = load_dataset("PolyAI/banking77", trust_remote_code=True)
     
     # Convert to pandas
     train_df = dataset['train'].to_pandas()
