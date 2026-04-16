@@ -1,9 +1,36 @@
 import os
 import argparse
+import re
+from difflib import get_close_matches
 import pandas as pd
 from tqdm import tqdm
 from sklearn.metrics import accuracy_score, classification_report
 from inference import IntentClassification
+
+
+def normalize_intent_label(text):
+    cleaned_text = str(text).strip().lower()
+    cleaned_text = re.sub(r"[^a-z0-9]+", "_", cleaned_text)
+    cleaned_text = re.sub(r"_+", "_", cleaned_text).strip("_")
+    return cleaned_text
+
+
+def map_to_known_label(prediction, known_labels):
+    normalized_prediction = normalize_intent_label(prediction)
+    normalized_labels = {normalize_intent_label(label): label for label in known_labels}
+
+    if normalized_prediction in normalized_labels:
+        return normalized_labels[normalized_prediction]
+
+    for normalized_label, original_label in normalized_labels.items():
+        if normalized_label in normalized_prediction or normalized_prediction in normalized_label:
+            return original_label
+
+    close_matches = get_close_matches(normalized_prediction, list(normalized_labels.keys()), n=1, cutoff=0.65)
+    if close_matches:
+        return normalized_labels[close_matches[0]]
+
+    return normalized_prediction
 
 def main():
     parser = argparse.ArgumentParser(description="Evaluate Intent Classification Model")
@@ -35,18 +62,32 @@ def main():
     # 3. Load Test Data
     print(f"Loading test data from {test_data_path}...")
     df = pd.read_csv(test_data_path)
+    known_labels = sorted(df['intent_name'].dropna().unique().tolist())
     
     # 4. Run Inference
     print(f"Running evaluation on {len(df)} samples...")
     y_true = df['intent_name'].tolist()
     y_pred = []
+    preview_rows = []
     
-    for message in tqdm(df['text'], desc=f"Evaluating {mode_str}"):
+    for index, message in enumerate(tqdm(df['text'], desc=f"Evaluating {mode_str}")):
         try:
             prediction = classifier(message)
-            y_pred.append(prediction)
+            mapped_prediction = map_to_known_label(prediction, known_labels)
+            y_pred.append(mapped_prediction)
+            if index < 5:
+                preview_rows.append((message, prediction, mapped_prediction))
         except Exception as e:
             y_pred.append("ERROR")
+            if index < 5:
+                preview_rows.append((message, f"ERROR: {e}", "ERROR"))
+
+    if preview_rows:
+        print("\nSample predictions:")
+        for message, raw_prediction, final_prediction in preview_rows:
+            print(f"- text={message[:90]!r}")
+            print(f"  raw={raw_prediction!r}")
+            print(f"  mapped={final_prediction!r}")
 
     # 5. Calculate Metrics
     accuracy = accuracy_score(y_true, y_pred)

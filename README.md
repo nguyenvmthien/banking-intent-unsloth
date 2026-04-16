@@ -91,7 +91,7 @@ To fulfill the assignment requirement for the final accuracy on the test set **a
 
 ```bash
 # 1. Evaluate the Base model (Zero-shot comparison)
-python scripts/evaluate.py --base
+python3 scripts/evaluate.py --base
 
 # 2. Evaluate your Fine-tuned model
 python scripts/evaluate.py
