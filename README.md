@@ -101,6 +101,30 @@ This will process the 308 sampled test messages and produce a detailed classific
 
 Because Unsloth uses Generative AI inference natively, it structures the input using a special instruction prompt template (found in `inference.py`) and allows the LLM to write out the explicit intent mapping.
 
+### 5. Upload the Model to Hugging Face
+
+If you do not want to push large artifacts to GitHub, upload the checkpoint to Hugging Face Hub and point `configs/inference.yaml` at that repo ID.
+
+1. Log in once:
+
+```bash
+huggingface-cli login
+```
+
+2. Upload the checkpoint folder:
+
+```bash
+python scripts/upload_to_hf.py --repo-id your-username/banking-intent-unsloth-checkpoint
+```
+
+3. Update `configs/inference.yaml`:
+
+```yaml
+model_path: "your-username/banking-intent-unsloth-checkpoint"
+```
+
+After that, `python3 scripts/evaluate.py` and `sh inference.sh` will load the adapter from Hugging Face instead of the local checkpoint folder.
+
 ## Demonstration Video
 
 **TODO:** Add your demonstration video link here.

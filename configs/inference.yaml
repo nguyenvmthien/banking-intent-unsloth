@@ -1,6 +1,8 @@
 # Inference Configuration
 model_name: "unsloth/llama-3-8b-Instruct-bnb-4bit" # Used for baseline comparison
-model_path: "../outputs/checkpoint"              # Used for final inference
+# model_path: "../outputs/checkpoint"              # Used for final inference
+# You can replace model_path with a Hugging Face repo id, for example:
+model_path: "minhthien/banking-intent-unsloth-checkpoint"
 max_seq_length: 256
 load_in_4bit: true
 max_new_tokens: 32 # Maximum tokens to generate for the intent text
