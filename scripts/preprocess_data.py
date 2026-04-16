@@ -3,6 +3,9 @@ import pandas as pd
 from datasets import load_dataset
 from sklearn.model_selection import StratifiedShuffleSplit
 
+# Set environment variable to trust legacy loading scripts (needed for PolyAI/banking77)
+os.environ["HF_DATASETS_TRUST_REMOTE_CODE"] = "1"
+
 def sample_dataset(df, test_size=0.1, random_state=42):
     """
     Stratified sampling to ensure all intent classes are still represented
