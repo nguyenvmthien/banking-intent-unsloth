@@ -1,4 +1,5 @@
 # Secrets — never commit
+.env
 configs/inference.yaml
 
 # Model weights & checkpoints
@@ -20,4 +21,3 @@ __pycache__/
 # Misc
 .DS_Store
 *.log
-.env

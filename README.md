@@ -1,4 +1,4 @@
-# Banking Intent Classification v2 — Qwen3-8B + Unsloth
+# Banking Intent Classification — Qwen3-8B + Unsloth
 
 Fine-tune **Qwen3-8B** (4-bit quantized via Unsloth) with LoRA adapters on the **Banking77** dataset to classify 77 banking customer intent categories.
 
@@ -13,7 +13,7 @@ Supports three inference modes: **zero-shot**, **few-shot**, and **fine-tuned**.
 ## Project Structure
 
 ```
-banking-intent-v2/
+banking-intent-unsloth/
 ├── scripts/
 │   ├── train.py              # Fine-tune Qwen3-8B with LoRA via Unsloth
 │   ├── inference.py          # IntentClassification class
@@ -21,15 +21,15 @@ banking-intent-v2/
 │   └── preprocess_data.py    # Download Banking77 from HuggingFace
 ├── configs/
 │   ├── train.yaml            # Training hyperparameters
-│   └── inference.yaml        # Inference configuration
+│   └── inference.yaml        # Inference configuration (gitignored — contains secrets)
 ├── sample_data/
 │   ├── train.csv             # Training set (~10,000 samples)
 │   └── test.csv              # Test set (~3,000 samples)
 ├── outputs/
 │   └── checkpoint/           # Saved LoRA adapter after training
 ├── train_kaggle.ipynb        # End-to-end Kaggle notebook with resume support
-├── train.sh
-├── inference.sh
+├── train.sh                  # preprocess + train
+├── inference.sh              # run inference (all 3 modes)
 └── requirements.txt
 ```
 
