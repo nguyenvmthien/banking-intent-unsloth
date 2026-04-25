@@ -15,7 +15,7 @@ data_path: "../sample_data/train.csv"
 learning_rate: 2.0e-4
 batch_size: 2
 gradient_accumulation_steps: 4
-num_train_epochs: 3
+num_train_epochs: 1
 optimizer: "adamw_8bit"
 weight_decay: 0.01
 lr_scheduler_type: "cosine"
