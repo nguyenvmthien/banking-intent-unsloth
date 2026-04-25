@@ -1,0 +1,14 @@
+numpy
+pandas
+scikit-learn
+pyyaml
+datasets
+transformers
+trl
+peft
+torch
+unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git
+xformers
+tqdm
+huggingface_hub
+langsmith

@@ -1,0 +1,34 @@
+# Base model — Qwen3-8B via Unsloth
+model_name: "unsloth/Qwen3-8B"
+max_seq_length: 2048
+load_in_4bit: true
+
+# LoRA
+lora_r: 16
+lora_alpha: 32
+lora_dropout: 0.05
+
+# Data
+data_path: "../sample_data/train.csv"
+
+# Training
+learning_rate: 2.0e-4
+batch_size: 2
+gradient_accumulation_steps: 4
+num_train_epochs: 3
+optimizer: "adamw_8bit"
+weight_decay: 0.01
+lr_scheduler_type: "cosine"
+seed: 3407
+
+# Output
+output_dir: "../outputs/checkpoint"
+
+# Checkpointing — saves every N steps so a crashed session can resume
+save_steps: 100
+save_total_limit: 3        # keep only the 3 most recent checkpoints (disk space)
+
+# HuggingFace Hub — push checkpoint during training so it survives Kaggle session death
+# Format: "{your-hf-username}/{repo-name}", leave empty to disable
+hub_model_id: ""
+hub_push_every_n_steps: 200   # must be a multiple of save_steps
