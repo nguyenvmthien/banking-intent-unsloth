@@ -85,18 +85,26 @@ def _match_label(generated: str) -> str:
     norm_gen = _normalize(generated)
     norm_map = {_normalize(lbl): lbl for lbl in INTENT_LABELS}
 
+    # Exact match after normalization
     if norm_gen in norm_map:
         return norm_map[norm_gen]
 
+    # Label substring found inside generated text (model output a sentence)
     for norm_lbl, orig_lbl in norm_map.items():
-        if norm_lbl in norm_gen or norm_gen in norm_lbl:
+        if norm_lbl in norm_gen:
             return orig_lbl
 
+    # Fuzzy match at strict cutoff
     matches = get_close_matches(norm_gen, list(norm_map.keys()), n=1, cutoff=0.55)
     if matches:
         return norm_map[matches[0]]
 
-    return generated
+    # Last resort: closest match regardless of cutoff
+    matches = get_close_matches(norm_gen, list(norm_map.keys()), n=1, cutoff=0.0)
+    if matches:
+        return norm_map[matches[0]]
+
+    return INTENT_LABELS[0]
 
 
 class IntentClassification:
@@ -154,6 +162,7 @@ class IntentClassification:
         self._setup_langsmith()
 
     def _load_few_shot_examples(self, data_path: str = None):
+        """Sample one example per intent from train.csv to build the few-shot pool."""
         if data_path is None:
             data_path = os.path.normpath(
                 os.path.join(self.config_dir, "../sample_data/train.csv")
@@ -169,8 +178,9 @@ class IntentClassification:
         print(f"Loaded {len(self.few_shot_examples)} few-shot examples.")
 
     def _setup_langsmith(self):
+        """Enable LangSmith tracing if an API key is available in env or config."""
         api_key = os.environ.get("LANGSMITH_API_KEY") or self.config.get("langsmith_api_key")
-        if api_key and _LANGSMITH_AVAILABLE:
+        if api_key and api_key != "YOUR KEY HERE" and _LANGSMITH_AVAILABLE:
             os.environ["LANGSMITH_API_KEY"] = api_key
             os.environ["LANGCHAIN_TRACING_V2"] = "true"
             project = self.config.get("langsmith_project", "banking-intent-v2")
@@ -180,6 +190,7 @@ class IntentClassification:
             print("LangSmith tracing disabled.")
 
     def _build_messages(self, user_text: str) -> list[dict]:
+        """Build the chat message list, optionally prepending few-shot examples."""
         system = SYSTEM_PROMPT
         if self.mode == "few_shot" and self.few_shot_examples:
             examples_str = "\n".join(
@@ -207,17 +218,22 @@ class IntentClassification:
         with torch.no_grad():
             outputs = self.model.generate(
                 inputs,
-                max_new_tokens=self.config.get("max_new_tokens", 64),
+                max_new_tokens=self.config.get("max_new_tokens", 512),
                 do_sample=False,
-                temperature=1.0,
                 pad_token_id=self.tokenizer.eos_token_id,
             )
 
         new_tokens = outputs[0][inputs.shape[-1]:]
-        raw_output = self.tokenizer.decode(new_tokens, skip_special_tokens=True).strip()
+        # Decode with skip_special_tokens=False so both <think> and </think> are
+        # preserved as text — prevents asymmetric stripping where one tag survives
+        # and the closing-tag regex wipes everything including the label.
+        raw_output = self.tokenizer.decode(new_tokens, skip_special_tokens=False).strip()
 
-        # Qwen3 thinking block is always generated internally; strip it from output
-        raw_output = re.sub(r"<think>.*?</think>", "", raw_output, flags=re.DOTALL).strip()
+        # Strip Qwen3 thinking blocks (closed then unclosed, angle and bracket forms).
+        raw_output = re.sub(r"(<think>|\[think\]).*?(</think>|\[/think\])", "", raw_output, flags=re.DOTALL)
+        raw_output = re.sub(r"(<think>|\[think\]).*", "", raw_output, flags=re.DOTALL)
+        # Remove any residual special tokens left by skip_special_tokens=False
+        raw_output = re.sub(r"<\|[^|]*\|>", "", raw_output).strip()
 
         label = _match_label(raw_output)
         return {"input": message, "raw_output": raw_output, "label": label}

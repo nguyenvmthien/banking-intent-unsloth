@@ -1,3 +1,10 @@
+"""
+Download and preprocess the Banking77 dataset from HuggingFace.
+
+Converts integer label IDs to human-readable intent name strings and saves
+train/test splits as CSV files under sample_data/.
+"""
+
 import os
 import pandas as pd
 
@@ -37,6 +44,7 @@ TRAIN_URL = "https://huggingface.co/datasets/PolyAI/banking77/resolve/refs%2Fcon
 TEST_URL  = "https://huggingface.co/datasets/PolyAI/banking77/resolve/refs%2Fconvert%2Fparquet/default/test/0000.parquet"
 
 def main():
+    """Download Banking77 from HuggingFace, map label IDs to names, and save CSVs."""
     print("Loading BANKING77 dataset from Hugging Face (parquet)...")
     train_df = pd.read_parquet(TRAIN_URL)
     test_df  = pd.read_parquet(TEST_URL)

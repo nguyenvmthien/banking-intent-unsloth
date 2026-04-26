@@ -16,6 +16,7 @@ from inference import IntentClassification
 
 
 def run_evaluation(classifier: IntentClassification, df: pd.DataFrame, label: str) -> float:
+    """Run inference on all rows in df and print accuracy + classification report."""
     y_true = df["intent_name"].tolist()
     y_pred = []
     previews = []
@@ -50,6 +51,7 @@ def run_evaluation(classifier: IntentClassification, df: pd.DataFrame, label: st
 
 
 def main():
+    """Parse CLI args, load test data, run evaluation for one or all modes."""
     parser = argparse.ArgumentParser()
     parser.add_argument("--mode", choices=["zero_shot", "few_shot", "finetuned", "all"],
                         default="finetuned")

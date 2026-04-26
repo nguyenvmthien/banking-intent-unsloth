@@ -7,8 +7,9 @@ model_path: "../outputs/checkpoint"
 max_seq_length: 2048
 load_in_4bit: true
 
-# Generation — max_new_tokens covers label text only (thinking tokens stripped at decode)
-max_new_tokens: 64
+# Generation — must be large enough for Qwen3 to finish its thinking block
+# before outputting the label (thinking alone can consume hundreds of tokens).
+max_new_tokens: 512
 
 # LangSmith
 langsmith_api_key: "YOUR KEY HERE"

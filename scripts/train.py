@@ -66,6 +66,7 @@ SYSTEM_PROMPT = (
 
 
 def format_sample(tokenizer, user_text: str, label: str) -> str:
+    """Format a single training example using the model's chat template."""
     messages = [
         {"role": "system", "content": SYSTEM_PROMPT},
         {"role": "user", "content": user_text},
@@ -98,6 +99,7 @@ class HubPushCallback(TrainerCallback):
         self.push_every = push_every
 
     def on_step_end(self, args, state, control, **kwargs):
+        """Push adapter weights to HF Hub at the configured step interval."""
         if state.global_step % self.push_every == 0:
             print(f"\n[HubPush] step {state.global_step} → pushing to {self.repo_id}")
             self.model.push_to_hub(self.repo_id, token=True)
@@ -105,6 +107,7 @@ class HubPushCallback(TrainerCallback):
 
 
 def main():
+    """Load config, build LoRA model, format dataset, and run SFT training."""
     config_path = "../configs/train.yaml"
     with open(config_path) as f:
         config = yaml.safe_load(f)
