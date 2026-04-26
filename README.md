@@ -2,7 +2,7 @@
 
 Fine-tune **Qwen3-8B** (4-bit quantized via Unsloth) with LoRA adapters on the **Banking77** dataset to classify 77 banking customer intent categories.
 
-Supports three inference modes: **zero-shot**, **few-shot**, and **fine-tuned**.
+Supports two inference modes: **zero-shot** and **fine-tuned**.
 
 ## Video Demonstration
 
@@ -21,15 +21,16 @@ banking-intent-unsloth/
 │   └── preprocess_data.py    # Download Banking77 from HuggingFace
 ├── configs/
 │   ├── train.yaml            # Training hyperparameters
-│   └── inference.yaml        # Inference configuration (gitignored — contains secrets)
+│   └── inference.yaml        # Inference configuration (set LANGSMITH_API_KEY here)
 ├── sample_data/
 │   ├── train.csv             # Training set (~10,000 samples)
 │   └── test.csv              # Test set (~3,000 samples)
 ├── outputs/
 │   └── checkpoint/           # Saved LoRA adapter after training
-├── train_kaggle.ipynb        # End-to-end Kaggle notebook with resume support
+├── train_kaggle.ipynb        # End-to-end Kaggle notebook (T4/P100)
+├── train_colab.ipynb         # End-to-end Colab notebook (A100, Drive checkpoint)
 ├── train.sh                  # preprocess + train
-├── inference.sh              # run inference (all 3 modes)
+├── inference.sh              # run inference
 └── requirements.txt
 ```
 
@@ -81,7 +82,7 @@ The LoRA adapter is saved to `outputs/checkpoint/`. Training automatically resum
 | LoRA alpha | 32 |
 | LoRA dropout | 0.05 |
 | LoRA target modules | q/k/v/o/gate/up/down proj |
-| Epochs | 3 |
+| Epochs | 1 |
 | Batch size | 2 |
 | Gradient accumulation steps | 4 |
 | Effective batch size | 8 |
@@ -95,28 +96,31 @@ The LoRA adapter is saved to `outputs/checkpoint/`. Training automatically resum
 
 ### 3. Inference
 
-The `IntentClassification` class in `scripts/inference.py` supports three modes:
+The `IntentClassification` class in `scripts/inference.py` supports two modes:
 
-| Mode | Model | Description |
-|------|-------|-------------|
-| `finetuned` (default) | LoRA adapter | Fine-tuned on Banking77 |
-| `zero_shot` | Base Qwen3-8B | No examples in prompt |
-| `few_shot` | Base Qwen3-8B | k examples injected into system prompt |
+| Mode | Model | `max_new_tokens` | Description |
+|------|-------|-----------------|-------------|
+| `finetuned` (default) | LoRA adapter | 32 | Fine-tuned on Banking77, outputs label directly |
+| `zero_shot` | Base Qwen3-8B | 512 | No examples — model reasons via thinking block |
+
+Batched inference is supported via `predict_batch(messages)` for faster evaluation.
 
 **Usage example:**
 
 ```python
-from scripts.inference import IntentClassification
+import sys
+sys.path.insert(0, "scripts")
+from inference import IntentClassification
 
-# model_path = path to inference.yaml config file
-clf = IntentClassification("configs/inference.yaml")
+clf = IntentClassification("configs/inference.yaml")  # finetuned (default)
 label = clf("I lost my credit card, how do I order a replacement?")
 print(label)  # e.g. "lost_or_stolen_card"
+
+# Batch inference
+results = clf.predict_batch(["I lost my card", "My PIN is blocked"])
 ```
 
 ```bash
-sh inference.sh
-# or
 cd scripts && python inference.py
 ```
 
@@ -128,11 +132,10 @@ Expected output:
   raw_output : 'lost_or_stolen_card'
   label      : 'lost_or_stolen_card'
 
-[FEW_SHOT]
-  ...
-
 [FINETUNED]
-  ...
+  input      : 'I lost my credit card yesterday, how do I order a new one?'
+  raw_output : 'lost_or_stolen_card'
+  label      : 'lost_or_stolen_card'
 ```
 
 ---
@@ -148,25 +151,40 @@ python evaluate.py
 # Base model — zero-shot
 python evaluate.py --mode zero_shot
 
-# Base model — few-shot (5 examples)
-python evaluate.py --mode few_shot --few_shot_k 5
-
-# All three modes with comparison summary
+# Both modes with comparison summary
 python evaluate.py --mode all
+
+# Override batch size (default from inference.yaml)
+python evaluate.py --mode all --batch_size 4
 ```
+
+#### Results (A100 40GB)
+
+| Mode | Dataset | Accuracy |
+|------|---------|----------|
+| Zero-Shot (base Qwen3-8B) | 200 stratified samples | 68.00% |
+| Fine-Tuned (LoRA, 1 epoch) | 200 stratified samples | 90.00% |
+| Fine-Tuned (LoRA, 1 epoch) | Full test set (3,080 samples) | **91.85%** |
 
 ---
 
-### 5. Kaggle (recommended for GPU)
+### 5. Running on GPU
 
-Open `train_kaggle.ipynb` on Kaggle. Before running:
+#### Kaggle (`train_kaggle.ipynb`)
 
-1. Kaggle → **Add-ons → Secrets**: add `HF_TOKEN` (HuggingFace token with write access)
+1. Kaggle → **Add-ons → Secrets**: add `HF_TOKEN`
 2. Notebook settings → **Accelerator**: GPU T4 x2 or P100
 3. Notebook settings → **Internet**: On
-4. Set `HF_REPO_ID` in the first cell to your HuggingFace repo
+4. Set `GITHUB_REPO_URL` and `HF_REPO_ID` in the first cell
 
-The notebook handles install → data download → training (with auto-resume if session dies) → sanity check inference.
+#### Google Colab (`train_colab.ipynb`) — recommended for A100
+
+1. Runtime → Change runtime type → **A100**
+2. Colab left sidebar → 🔑 **Secrets**: add `HF_TOKEN`
+3. Set `GITHUB_REPO_URL` and `HF_REPO_ID` in the first cell
+4. Checkpoints are saved to Google Drive automatically — survives session restarts
+
+Both notebooks handle: install → data download → training (auto-resume from checkpoint) → evaluate.
 
 ---
 

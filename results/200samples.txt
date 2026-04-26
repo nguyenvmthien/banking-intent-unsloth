@@ -1,0 +1,695 @@
+ Sampled 200 rows across 77 intents
+============================================================
+EVALUATE — 200 samples
+============================================================
+[ZERO_SHOT] Loading model: unsloth/Qwen3-8B
+==((====))==  Unsloth 2026.4.8: Fast Qwen3 patching. Transformers: 5.5.0.
+   \\   /|    NVIDIA A100-SXM4-40GB. Num GPUs = 1. Max memory: 39.494 GB. Platform: Linux.
+O^O/ \_/ \    Torch: 2.10.0+cu128. CUDA: 8.0. CUDA Toolkit: 12.8. Triton: 3.6.0
+\        /    Bfloat16 = TRUE. FA [Xformers = None. FA2 = False]
+ "-____-"     Free license: http://github.com/unslothai/unsloth
+Unsloth: Fast downloading is enabled - ignore downloading bars which are red colored!
+Loading weights: 100% 399/399 [00:02<00:00, 313.80it/s]unsloth/qwen3-8b-unsloth-bnb-4bit does not have a padding token! Will use pad_token = <|PAD_TOKEN|>.
+LangSmith tracing disabled.
+zero_shot:   0%|          | 0/25 [00:00<?, ?it/s]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:71: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:281: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:172: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:202: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:254: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+  [OK] true=virtual_card_not_working  pred=virtual_card_not_working
+  [OK] true=change_pin  pred=change_pin
+  [OK] true=apple_pay_or_google_pay  pred=apple_pay_or_google_pay
+  [MISS] true=top_up_by_bank_transfer_charge  pred=transfer_fee_charged
+  [OK] true=automatic_top_up  pred=automatic_top_up
+  [OK] true=transfer_not_received_by_recipient  pred=transfer_not_received_by_recipient
+  [MISS] true=beneficiary_not_allowed  pred=failed_transfer
+  [OK] true=transfer_into_account  pred=transfer_into_account
+zero_shot:   4%|▍         | 1/25 [00:21<08:28, 21.20s/it]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [MISS] true=receiving_money  pred=fiat_currency_support
+  [OK] true=lost_or_stolen_card  pred=lost_or_stolen_card
+  [OK] true=verify_top_up  pred=verify_top_up
+  [MISS] true=balance_not_updated_after_bank_transfer  pred=pending_transfer
+  [OK] true=exchange_charge  pred=exchange_charge
+  [OK] true=top_up_failed  pred=top_up_failed
+  [OK] true=top_up_by_cash_or_cheque  pred=top_up_by_cash_or_cheque
+  [OK] true=passcode_forgotten  pred=passcode_forgotten
+zero_shot:   8%|▊         | 2/25 [00:44<08:30, 22.19s/it]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [MISS] true=pending_top_up  pred=top_up_failed
+  [OK] true=card_about_to_expire  pred=card_about_to_expire
+  [OK] true=wrong_amount_of_cash_received  pred=wrong_amount_of_cash_received
+  [MISS] true=top_up_reverted  pred=top_up_failed
+  [OK] true=failed_transfer  pred=failed_transfer
+  [OK] true=supported_cards_and_currencies  pred=supported_cards_and_currencies
+  [OK] true=unable_to_verify_identity  pred=unable_to_verify_identity
+  [OK] true=top_up_limits  pred=top_up_limits
+zero_shot:  12%|█▏        | 3/25 [01:05<08:02, 21.95s/it]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=getting_virtual_card  pred=getting_virtual_card
+  [MISS] true=balance_not_updated_after_bank_transfer  pred=transfer_not_received_by_recipient
+  [OK] true=pending_transfer  pred=pending_transfer
+  [OK] true=exchange_rate  pred=exchange_rate
+  [OK] true=exchange_via_app  pred=exchange_via_app
+  [OK] true=declined_transfer  pred=declined_transfer
+  [MISS] true=transfer_not_received_by_recipient  pred=pending_transfer
+  [OK] true=cash_withdrawal_charge  pred=cash_withdrawal_charge
+zero_shot:  16%|█▌        | 4/25 [01:22<07:00, 20.02s/it]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [MISS] true=get_physical_card  pred=passcode_forgotten
+  [OK] true=card_not_working  pred=card_not_working
+  [MISS] true=automatic_top_up  pred=lost_or_stolen_card
+  [OK] true=lost_or_stolen_card  pred=lost_or_stolen_card
+  [MISS] true=reverted_card_payment?  pred=declined_card_payment
+  [MISS] true=get_physical_card  pred=change_pin
+  [OK] true=declined_cash_withdrawal  pred=declined_cash_withdrawal
+  [MISS] true=pending_top_up  pred=wrong_exchange_rate_for_cash_withdrawal
+zero_shot:  20%|██        | 5/25 [01:58<08:34, 25.72s/it]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=edit_personal_details  pred=edit_personal_details
+  [MISS] true=transfer_fee_charged  pred=exchange_charge
+  [MISS] true=pending_cash_withdrawal  pred=pending_card_payment
+  [OK] true=contactless_not_working  pred=contactless_not_working
+  [MISS] true=fiat_currency_support  pred=supported_cards_and_currencies
+  [MISS] true=fiat_currency_support  pred=supported_cards_and_currencies
+  [OK] true=pin_blocked  pred=pin_blocked
+  [OK] true=card_payment_wrong_exchange_rate  pred=card_payment_wrong_exchange_rate
+zero_shot:  24%|██▍       | 6/25 [02:27<08:31, 26.93s/it]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:71: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:281: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:202: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:254: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+  [MISS] true=wrong_exchange_rate_for_cash_withdrawal  pred=atm_support
+  [MISS] true=compromised_card  pred=wrong_exchange_rate_for_cash_withdrawal
+  [MISS] true=top_up_by_bank_transfer_charge  pred=receiving_money
+  [OK] true=failed_transfer  pred=failed_transfer
+  [OK] true=getting_virtual_card  pred=getting_virtual_card
+  [OK] true=declined_card_payment  pred=declined_card_payment
+  [MISS] true=declined_transfer  pred=declined_card_payment
+  [OK] true=edit_personal_details  pred=edit_personal_details
+zero_shot:  28%|██▊       | 7/25 [03:03<08:56, 29.82s/it]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:172: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+  [OK] true=visa_or_mastercard  pred=visa_or_mastercard
+  [MISS] true=get_physical_card  pred=card_not_working
+  [MISS] true=card_arrival  pred=card_delivery_estimate
+  [MISS] true=beneficiary_not_allowed  pred=wrong_exchange_rate_for_cash_withdrawal
+  [OK] true=change_pin  pred=change_pin
+  [MISS] true=topping_up_by_card  pred=top_up_by_cash_or_cheque
+  [MISS] true=transfer_not_received_by_recipient  pred=receiving_money
+  [MISS] true=apple_pay_or_google_pay  pred=topping_up_by_card
+zero_shot:  32%|███▏      | 8/25 [03:39<08:58, 31.69s/it]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=getting_spare_card  pred=getting_spare_card
+  [OK] true=cancel_transfer  pred=cancel_transfer
+  [MISS] true=receiving_money  pred=transfer_into_account
+  [OK] true=change_pin  pred=change_pin
+  [OK] true=country_support  pred=country_support
+  [OK] true=activate_my_card  pred=activate_my_card
+  [MISS] true=card_payment_wrong_exchange_rate  pred=exchange_rate
+  [OK] true=get_disposable_virtual_card  pred=get_disposable_virtual_card
+zero_shot:  36%|███▌      | 9/25 [04:06<08:03, 30.24s/it]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=pending_card_payment  pred=pending_card_payment
+  [OK] true=transfer_fee_charged  pred=transfer_fee_charged
+  [MISS] true=cash_withdrawal_not_recognised  pred=lost_or_stolen_card
+  [OK] true=pending_cash_withdrawal  pred=pending_cash_withdrawal
+  [OK] true=transfer_into_account  pred=transfer_into_account
+  [OK] true=passcode_forgotten  pred=passcode_forgotten
+  [MISS] true=card_about_to_expire  pred=get_physical_card
+  [OK] true=atm_support  pred=atm_support
+zero_shot:  40%|████      | 10/25 [04:33<07:19, 29.33s/it]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=card_acceptance  pred=card_acceptance
+  [OK] true=cancel_transfer  pred=cancel_transfer
+  [OK] true=card_linking  pred=card_linking
+  [MISS] true=wrong_exchange_rate_for_cash_withdrawal  pred=exchange_rate
+  [MISS] true=get_disposable_virtual_card  pred=disposable_card_limits
+  [MISS] true=receiving_money  pred=wrong_exchange_rate_for_cash_withdrawal
+  [MISS] true=card_payment_not_recognised  pred=compromised_card
+  [OK] true=order_physical_card  pred=order_physical_card
+zero_shot:  44%|████▍     | 11/25 [05:09<07:17, 31.24s/it]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=top_up_reverted  pred=top_up_reverted
+  [MISS] true=country_support  pred=get_physical_card
+  [MISS] true=card_delivery_estimate  pred=get_physical_card
+  [OK] true=exchange_charge  pred=exchange_charge
+  [MISS] true=pending_card_payment  pred=wrong_exchange_rate_for_cash_withdrawal
+  [OK] true=declined_card_payment  pred=declined_card_payment
+  [OK] true=passcode_forgotten  pred=passcode_forgotten
+  [MISS] true=beneficiary_not_allowed  pred=declined_transfer
+zero_shot:  48%|████▊     | 12/25 [05:44<07:03, 32.56s/it]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=verify_source_of_funds  pred=verify_source_of_funds
+  [MISS] true=top_up_by_card_charge  pred=top_up_by_bank_transfer_charge
+  [OK] true=request_refund  pred=request_refund
+  [OK] true=Refund_not_showing_up  pred=Refund_not_showing_up
+  [OK] true=Refund_not_showing_up  pred=Refund_not_showing_up
+  [OK] true=country_support  pred=country_support
+  [OK] true=card_not_working  pred=card_not_working
+  [OK] true=exchange_rate  pred=exchange_rate
+zero_shot:  52%|█████▏    | 13/25 [06:02<05:34, 27.91s/it]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=fiat_currency_support  pred=fiat_currency_support
+  [OK] true=pending_card_payment  pred=pending_card_payment
+  [OK] true=terminate_account  pred=terminate_account
+  [OK] true=disposable_card_limits  pred=disposable_card_limits
+  [MISS] true=declined_transfer  pred=declined_card_payment
+  [MISS] true=reverted_card_payment?  pred=wrong_exchange_rate_for_cash_withdrawal
+  [OK] true=pin_blocked  pred=pin_blocked
+  [OK] true=exchange_charge  pred=exchange_charge
+zero_shot:  56%|█████▌    | 14/25 [06:37<05:33, 30.30s/it]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [MISS] true=card_arrival  pred=card_delivery_estimate
+  [OK] true=top_up_limits  pred=top_up_limits
+  [OK] true=cash_withdrawal_charge  pred=cash_withdrawal_charge
+  [MISS] true=balance_not_updated_after_cheque_or_cash_deposit  pred=wrong_exchange_rate_for_cash_withdrawal
+  [OK] true=visa_or_mastercard  pred=visa_or_mastercard
+  [OK] true=top_up_reverted  pred=top_up_reverted
+  [OK] true=card_acceptance  pred=card_acceptance
+  [MISS] true=apple_pay_or_google_pay  pred=wrong_exchange_rate_for_cash_withdrawal
+zero_shot:  60%|██████    | 15/25 [07:13<05:19, 31.93s/it]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=wrong_amount_of_cash_received  pred=wrong_amount_of_cash_received
+  [OK] true=top_up_limits  pred=top_up_limits
+  [OK] true=age_limit  pred=age_limit
+  [OK] true=cancel_transfer  pred=cancel_transfer
+  [OK] true=pending_cash_withdrawal  pred=pending_cash_withdrawal
+  [OK] true=visa_or_mastercard  pred=visa_or_mastercard
+  [MISS] true=why_verify_identity  pred=unable_to_verify_identity
+  [OK] true=request_refund  pred=request_refund
+zero_shot:  64%|██████▍   | 16/25 [07:39<04:32, 30.24s/it]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=activate_my_card  pred=activate_my_card
+  [OK] true=getting_spare_card  pred=getting_spare_card
+  [OK] true=card_about_to_expire  pred=card_about_to_expire
+  [MISS] true=supported_cards_and_currencies  pred=fiat_currency_support
+  [OK] true=cash_withdrawal_charge  pred=cash_withdrawal_charge
+  [OK] true=lost_or_stolen_card  pred=lost_or_stolen_card
+  [OK] true=verify_my_identity  pred=verify_my_identity
+  [MISS] true=top_up_by_card_charge  pred=topping_up_by_card
+zero_shot:  68%|██████▊   | 17/25 [08:05<03:51, 28.92s/it]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=compromised_card  pred=compromised_card
+  [OK] true=top_up_by_cash_or_cheque  pred=top_up_by_cash_or_cheque
+  [MISS] true=cash_withdrawal_not_recognised  pred=compromised_card
+  [OK] true=card_linking  pred=card_linking
+  [MISS] true=pending_transfer  pred=transfer_timing
+  [OK] true=card_delivery_estimate  pred=card_delivery_estimate
+  [OK] true=getting_virtual_card  pred=getting_virtual_card
+  [OK] true=balance_not_updated_after_cheque_or_cash_deposit  pred=balance_not_updated_after_cheque_or_cash_deposit
+zero_shot:  72%|███████▏  | 18/25 [08:37<03:28, 29.85s/it]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=top_up_by_card_charge  pred=top_up_by_card_charge
+  [OK] true=terminate_account  pred=terminate_account
+  [OK] true=declined_cash_withdrawal  pred=declined_cash_withdrawal
+  [OK] true=card_delivery_estimate  pred=card_delivery_estimate
+  [OK] true=transfer_fee_charged  pred=transfer_fee_charged
+  [OK] true=card_not_working  pred=card_not_working
+  [OK] true=edit_personal_details  pred=edit_personal_details
+  [OK] true=transaction_charged_twice  pred=transaction_charged_twice
+zero_shot:  76%|███████▌  | 19/25 [08:58<02:42, 27.09s/it]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [MISS] true=card_linking  pred=card_arrival
+  [OK] true=pending_top_up  pred=pending_top_up
+  [OK] true=unable_to_verify_identity  pred=unable_to_verify_identity
+  [OK] true=activate_my_card  pred=activate_my_card
+  [MISS] true=extra_charge_on_statement  pred=wrong_exchange_rate_for_cash_withdrawal
+  [MISS] true=card_payment_not_recognised  pred=compromised_card
+  [MISS] true=order_physical_card  pred=wrong_exchange_rate_for_cash_withdrawal
+  [OK] true=verify_my_identity  pred=verify_my_identity
+zero_shot:  80%|████████  | 20/25 [09:34<02:28, 29.65s/it]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=top_up_failed  pred=top_up_failed
+  [OK] true=verify_top_up  pred=verify_top_up
+  [OK] true=card_payment_fee_charged  pred=card_payment_fee_charged
+  [OK] true=supported_cards_and_currencies  pred=supported_cards_and_currencies
+  [OK] true=declined_card_payment  pred=declined_card_payment
+  [OK] true=card_acceptance  pred=card_acceptance
+  [MISS] true=age_limit  pred=verify_my_identity
+  [OK] true=failed_transfer  pred=failed_transfer
+zero_shot:  84%|████████▍ | 21/25 [09:57<01:51, 27.85s/it]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=disposable_card_limits  pred=disposable_card_limits
+  [OK] true=declined_cash_withdrawal  pred=declined_cash_withdrawal
+  [MISS] true=unable_to_verify_identity  pred=wrong_exchange_rate_for_cash_withdrawal
+  [OK] true=verify_my_identity  pred=verify_my_identity
+  [MISS] true=direct_debit_payment_not_recognised  pred=wrong_exchange_rate_for_cash_withdrawal
+  [OK] true=age_limit  pred=age_limit
+  [OK] true=atm_support  pred=atm_support
+  [OK] true=card_swallowed  pred=card_swallowed
+zero_shot:  88%|████████▊ | 22/25 [10:33<01:30, 30.14s/it]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=transfer_into_account  pred=transfer_into_account
+  [OK] true=lost_or_stolen_phone  pred=lost_or_stolen_phone
+  [OK] true=automatic_top_up  pred=automatic_top_up
+  [OK] true=terminate_account  pred=terminate_account
+  [OK] true=contactless_not_working  pred=contactless_not_working
+  [OK] true=transfer_timing  pred=transfer_timing
+  [MISS] true=order_physical_card  pred=wrong_exchange_rate_for_cash_withdrawal
+  [MISS] true=why_verify_identity  pred=unable_to_verify_identity
+zero_shot:  92%|█████████▏| 23/25 [11:08<01:03, 31.79s/it]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=verify_source_of_funds  pred=verify_source_of_funds
+  [MISS] true=cash_withdrawal_not_recognised  pred=compromised_card
+  [OK] true=card_payment_wrong_exchange_rate  pred=card_payment_wrong_exchange_rate
+  [MISS] true=extra_charge_on_statement  pred=exchange_charge
+  [OK] true=card_payment_fee_charged  pred=card_payment_fee_charged
+  [OK] true=top_up_by_cash_or_cheque  pred=top_up_by_cash_or_cheque
+  [OK] true=transfer_timing  pred=transfer_timing
+  [OK] true=transaction_charged_twice  pred=transaction_charged_twice
+zero_shot:  96%|█████████▌| 24/25 [11:38<00:31, 31.12s/it]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [MISS] true=wrong_amount_of_cash_received  pred=declined_cash_withdrawal
+  [OK] true=virtual_card_not_working  pred=virtual_card_not_working
+  [MISS] true=top_up_by_bank_transfer_charge  pred=wrong_exchange_rate_for_cash_withdrawal
+  [OK] true=card_swallowed  pred=card_swallowed
+  [OK] true=card_payment_fee_charged  pred=card_payment_fee_charged
+  [MISS] true=direct_debit_payment_not_recognised  pred=extra_charge_on_statement
+  [OK] true=balance_not_updated_after_cheque_or_cash_deposit  pred=balance_not_updated_after_cheque_or_cash_deposit
+  [OK] true=card_swallowed  pred=card_swallowed
+zero_shot: 100%|██████████| 25/25 [12:14<00:00, 29.37s/it]
+>>> zero_shot accuracy: 0.6800 (136/200)
+
+                                                  precision    recall  f1-score   support
+
+                           Refund_not_showing_up     1.0000    1.0000    1.0000         2
+                                activate_my_card     1.0000    1.0000    1.0000         3
+                                       age_limit     1.0000    0.6667    0.8000         3
+                         apple_pay_or_google_pay     1.0000    0.3333    0.5000         3
+                                     atm_support     0.6667    1.0000    0.8000         2
+                                automatic_top_up     1.0000    0.6667    0.8000         3
+         balance_not_updated_after_bank_transfer     0.0000    0.0000    0.0000         2
+balance_not_updated_after_cheque_or_cash_deposit     1.0000    0.6667    0.8000         3
+                         beneficiary_not_allowed     0.0000    0.0000    0.0000         3
+                                 cancel_transfer     1.0000    1.0000    1.0000         3
+                            card_about_to_expire     1.0000    0.6667    0.8000         3
+                                 card_acceptance     1.0000    1.0000    1.0000         3
+                                    card_arrival     0.0000    0.0000    0.0000         2
+                          card_delivery_estimate     0.5000    0.6667    0.5714         3
+                                    card_linking     1.0000    0.6667    0.8000         3
+                                card_not_working     0.7500    1.0000    0.8571         3
+                        card_payment_fee_charged     1.0000    1.0000    1.0000         3
+                     card_payment_not_recognised     0.0000    0.0000    0.0000         2
+                card_payment_wrong_exchange_rate     1.0000    0.6667    0.8000         3
+                                  card_swallowed     1.0000    1.0000    1.0000         3
+                          cash_withdrawal_charge     1.0000    1.0000    1.0000         3
+                  cash_withdrawal_not_recognised     0.0000    0.0000    0.0000         3
+                                      change_pin     0.7500    1.0000    0.8571         3
+                                compromised_card     0.2000    0.5000    0.2857         2
+                         contactless_not_working     1.0000    1.0000    1.0000         2
+                                 country_support     1.0000    0.6667    0.8000         3
+                           declined_card_payment     0.5000    1.0000    0.6667         3
+                        declined_cash_withdrawal     0.7500    1.0000    0.8571         3
+                               declined_transfer     0.5000    0.3333    0.4000         3
+             direct_debit_payment_not_recognised     0.0000    0.0000    0.0000         2
+                          disposable_card_limits     0.6667    1.0000    0.8000         2
+                           edit_personal_details     1.0000    1.0000    1.0000         3
+                                 exchange_charge     0.6000    1.0000    0.7500         3
+                                   exchange_rate     0.5000    1.0000    0.6667         2
+                                exchange_via_app     1.0000    1.0000    1.0000         1
+                       extra_charge_on_statement     0.0000    0.0000    0.0000         2
+                                 failed_transfer     0.7500    1.0000    0.8571         3
+                           fiat_currency_support     0.3333    0.3333    0.3333         3
+                     get_disposable_virtual_card     1.0000    0.5000    0.6667         2
+                               get_physical_card     0.0000    0.0000    0.0000         3
+                              getting_spare_card     1.0000    1.0000    1.0000         2
+                            getting_virtual_card     1.0000    1.0000    1.0000         3
+                             lost_or_stolen_card     0.6000    1.0000    0.7500         3
+                            lost_or_stolen_phone     1.0000    1.0000    1.0000         1
+                             order_physical_card     1.0000    0.3333    0.5000         3
+                              passcode_forgotten     0.7500    1.0000    0.8571         3
+                            pending_card_payment     0.6667    0.6667    0.6667         3
+                         pending_cash_withdrawal     1.0000    0.6667    0.8000         3
+                                  pending_top_up     1.0000    0.3333    0.5000         3
+                                pending_transfer     0.3333    0.5000    0.4000         2
+                                     pin_blocked     1.0000    1.0000    1.0000         2
+                                 receiving_money     0.0000    0.0000    0.0000         3
+                                  request_refund     1.0000    1.0000    1.0000         2
+                          reverted_card_payment?     0.0000    0.0000    0.0000         2
+                  supported_cards_and_currencies     0.5000    0.6667    0.5714         3
+                               terminate_account     1.0000    1.0000    1.0000         3
+                  top_up_by_bank_transfer_charge     0.0000    0.0000    0.0000         3
+                           top_up_by_card_charge     1.0000    0.3333    0.5000         3
+                        top_up_by_cash_or_cheque     0.7500    1.0000    0.8571         3
+                                   top_up_failed     0.5000    1.0000    0.6667         2
+                                   top_up_limits     1.0000    1.0000    1.0000         3
+                                 top_up_reverted     1.0000    0.6667    0.8000         3
+                              topping_up_by_card     0.0000    0.0000    0.0000         1
+                       transaction_charged_twice     1.0000    1.0000    1.0000         2
+                            transfer_fee_charged     0.6667    0.6667    0.6667         3
+                           transfer_into_account     0.7500    1.0000    0.8571         3
+              transfer_not_received_by_recipient     0.5000    0.3333    0.4000         3
+                                 transfer_timing     0.6667    1.0000    0.8000         2
+                       unable_to_verify_identity     0.5000    0.6667    0.5714         3
+                              verify_my_identity     0.7500    1.0000    0.8571         3
+                          verify_source_of_funds     1.0000    1.0000    1.0000         2
+                                   verify_top_up     1.0000    1.0000    1.0000         2
+                        virtual_card_not_working     1.0000    1.0000    1.0000         2
+                              visa_or_mastercard     1.0000    1.0000    1.0000         3
+                             why_verify_identity     0.0000    0.0000    0.0000         2
+                   wrong_amount_of_cash_received     1.0000    0.6667    0.8000         3
+         wrong_exchange_rate_for_cash_withdrawal     0.0000    0.0000    0.0000         2
+
+                                        accuracy                         0.6800       200
+                                       macro avg     0.6805    0.6732    0.6531       200
+                                    weighted avg     0.6983    0.6800    0.6639       200
+
+
+/usr/local/lib/python3.12/dist-packages/sklearn/metrics/_classification.py:1565: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/usr/local/lib/python3.12/dist-packages/sklearn/metrics/_classification.py:1565: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/usr/local/lib/python3.12/dist-packages/sklearn/metrics/_classification.py:1565: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+VRAM freed: 0.11GB used
+[FINETUNED] Loading model: ../outputs/checkpoint
+==((====))==  Unsloth 2026.4.8: Fast Qwen3 patching. Transformers: 5.5.0.
+   \\   /|    NVIDIA A100-SXM4-40GB. Num GPUs = 1. Max memory: 39.494 GB. Platform: Linux.
+O^O/ \_/ \    Torch: 2.10.0+cu128. CUDA: 8.0. CUDA Toolkit: 12.8. Triton: 3.6.0
+\        /    Bfloat16 = TRUE. FA [Xformers = None. FA2 = False]
+ "-____-"     Free license: http://github.com/unslothai/unsloth
+Unsloth: Fast downloading is enabled - ignore downloading bars which are red colored!
+Loading weights: 100% 399/399 [00:02<00:00, 308.84it/s]unsloth/qwen3-8b-unsloth-bnb-4bit does not have a padding token! Will use pad_token = <|PAD_TOKEN|>.
+LangSmith tracing disabled.
+finetuned:   0%|          | 0/25 [00:00<?, ?it/s]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:71: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:281: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:172: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:202: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:254: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+  [OK] true=virtual_card_not_working  pred=virtual_card_not_working
+  [OK] true=change_pin  pred=change_pin
+  [OK] true=apple_pay_or_google_pay  pred=apple_pay_or_google_pay
+  [MISS] true=top_up_by_bank_transfer_charge  pred=transfer_fee_charged
+  [OK] true=automatic_top_up  pred=automatic_top_up
+  [OK] true=transfer_not_received_by_recipient  pred=transfer_not_received_by_recipient
+  [OK] true=beneficiary_not_allowed  pred=beneficiary_not_allowed
+  [OK] true=transfer_into_account  pred=transfer_into_account
+finetuned:   4%|▍         | 1/25 [00:01<00:36,  1.51s/it]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=receiving_money  pred=receiving_money
+  [OK] true=lost_or_stolen_card  pred=lost_or_stolen_card
+  [OK] true=verify_top_up  pred=verify_top_up
+  [MISS] true=balance_not_updated_after_bank_transfer  pred=transfer_not_received_by_recipient
+  [OK] true=exchange_charge  pred=exchange_charge
+  [OK] true=top_up_failed  pred=top_up_failed
+  [OK] true=top_up_by_cash_or_cheque  pred=top_up_by_cash_or_cheque
+  [OK] true=passcode_forgotten  pred=passcode_forgotten
+finetuned:   8%|▊         | 2/25 [00:03<00:35,  1.53s/it]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=pending_top_up  pred=pending_top_up
+  [OK] true=card_about_to_expire  pred=card_about_to_expire
+  [OK] true=wrong_amount_of_cash_received  pred=wrong_amount_of_cash_received
+  [MISS] true=top_up_reverted  pred=top_up_failed
+  [OK] true=failed_transfer  pred=failed_transfer
+  [OK] true=supported_cards_and_currencies  pred=supported_cards_and_currencies
+  [OK] true=unable_to_verify_identity  pred=unable_to_verify_identity
+  [OK] true=top_up_limits  pred=top_up_limits
+finetuned:  12%|█▏        | 3/25 [00:04<00:31,  1.43s/it]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=getting_virtual_card  pred=getting_virtual_card
+  [MISS] true=balance_not_updated_after_bank_transfer  pred=transfer_not_received_by_recipient
+  [OK] true=pending_transfer  pred=pending_transfer
+  [OK] true=exchange_rate  pred=exchange_rate
+  [OK] true=exchange_via_app  pred=exchange_via_app
+  [OK] true=declined_transfer  pred=declined_transfer
+  [OK] true=transfer_not_received_by_recipient  pred=transfer_not_received_by_recipient
+  [OK] true=cash_withdrawal_charge  pred=cash_withdrawal_charge
+finetuned:  16%|█▌        | 4/25 [00:05<00:29,  1.42s/it]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=get_physical_card  pred=get_physical_card
+  [OK] true=card_not_working  pred=card_not_working
+  [MISS] true=automatic_top_up  pred=lost_or_stolen_phone
+  [OK] true=lost_or_stolen_card  pred=lost_or_stolen_card
+  [OK] true=reverted_card_payment?  pred=reverted_card_payment?
+  [OK] true=get_physical_card  pred=get_physical_card
+  [OK] true=declined_cash_withdrawal  pred=declined_cash_withdrawal
+  [OK] true=pending_top_up  pred=pending_top_up
+finetuned:  20%|██        | 5/25 [00:07<00:28,  1.42s/it]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=edit_personal_details  pred=edit_personal_details
+  [OK] true=transfer_fee_charged  pred=transfer_fee_charged
+  [OK] true=pending_cash_withdrawal  pred=pending_cash_withdrawal
+  [OK] true=contactless_not_working  pred=contactless_not_working
+  [OK] true=fiat_currency_support  pred=fiat_currency_support
+  [OK] true=fiat_currency_support  pred=fiat_currency_support
+  [OK] true=pin_blocked  pred=pin_blocked
+  [OK] true=card_payment_wrong_exchange_rate  pred=card_payment_wrong_exchange_rate
+finetuned:  24%|██▍       | 6/25 [00:08<00:26,  1.40s/it]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=wrong_exchange_rate_for_cash_withdrawal  pred=wrong_exchange_rate_for_cash_withdrawal
+  [OK] true=compromised_card  pred=compromised_card
+  [OK] true=top_up_by_bank_transfer_charge  pred=top_up_by_bank_transfer_charge
+  [OK] true=failed_transfer  pred=failed_transfer
+  [OK] true=getting_virtual_card  pred=getting_virtual_card
+  [OK] true=declined_card_payment  pred=declined_card_payment
+  [MISS] true=declined_transfer  pred=declined_card_payment
+  [OK] true=edit_personal_details  pred=edit_personal_details
+finetuned:  28%|██▊       | 7/25 [00:10<00:26,  1.48s/it]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=visa_or_mastercard  pred=visa_or_mastercard
+  [OK] true=get_physical_card  pred=get_physical_card
+  [OK] true=card_arrival  pred=card_arrival
+  [MISS] true=beneficiary_not_allowed  pred=top_up_failed
+  [OK] true=change_pin  pred=change_pin
+  [OK] true=topping_up_by_card  pred=topping_up_by_card
+  [OK] true=transfer_not_received_by_recipient  pred=transfer_not_received_by_recipient
+  [OK] true=apple_pay_or_google_pay  pred=apple_pay_or_google_pay
+finetuned:  32%|███▏      | 8/25 [00:11<00:25,  1.47s/it]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=getting_spare_card  pred=getting_spare_card
+  [OK] true=cancel_transfer  pred=cancel_transfer
+  [OK] true=receiving_money  pred=receiving_money
+  [OK] true=change_pin  pred=change_pin
+  [OK] true=country_support  pred=country_support
+  [OK] true=activate_my_card  pred=activate_my_card
+  [OK] true=card_payment_wrong_exchange_rate  pred=card_payment_wrong_exchange_rate
+  [OK] true=get_disposable_virtual_card  pred=get_disposable_virtual_card
+finetuned:  36%|███▌      | 9/25 [00:12<00:22,  1.43s/it]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=pending_card_payment  pred=pending_card_payment
+  [OK] true=transfer_fee_charged  pred=transfer_fee_charged
+  [OK] true=cash_withdrawal_not_recognised  pred=cash_withdrawal_not_recognised
+  [OK] true=pending_cash_withdrawal  pred=pending_cash_withdrawal
+  [OK] true=transfer_into_account  pred=transfer_into_account
+  [OK] true=passcode_forgotten  pred=passcode_forgotten
+  [OK] true=card_about_to_expire  pred=card_about_to_expire
+  [OK] true=atm_support  pred=atm_support
+finetuned:  40%|████      | 10/25 [00:14<00:22,  1.49s/it]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=card_acceptance  pred=card_acceptance
+  [OK] true=cancel_transfer  pred=cancel_transfer
+  [OK] true=card_linking  pred=card_linking
+  [OK] true=wrong_exchange_rate_for_cash_withdrawal  pred=wrong_exchange_rate_for_cash_withdrawal
+  [MISS] true=get_disposable_virtual_card  pred=disposable_card_limits
+  [OK] true=receiving_money  pred=receiving_money
+  [OK] true=card_payment_not_recognised  pred=card_payment_not_recognised
+  [MISS] true=order_physical_card  pred=country_support
+finetuned:  44%|████▍     | 11/25 [00:16<00:21,  1.52s/it]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=top_up_reverted  pred=top_up_reverted
+  [OK] true=country_support  pred=country_support
+  [MISS] true=card_delivery_estimate  pred=card_arrival
+  [OK] true=exchange_charge  pred=exchange_charge
+  [MISS] true=pending_card_payment  pred=pending_transfer
+  [OK] true=declined_card_payment  pred=declined_card_payment
+  [OK] true=passcode_forgotten  pred=passcode_forgotten
+  [OK] true=beneficiary_not_allowed  pred=beneficiary_not_allowed
+finetuned:  48%|████▊     | 12/25 [00:17<00:18,  1.46s/it]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=verify_source_of_funds  pred=verify_source_of_funds
+  [OK] true=top_up_by_card_charge  pred=top_up_by_card_charge
+  [OK] true=request_refund  pred=request_refund
+  [OK] true=Refund_not_showing_up  pred=Refund_not_showing_up
+  [OK] true=Refund_not_showing_up  pred=Refund_not_showing_up
+  [OK] true=country_support  pred=country_support
+  [OK] true=card_not_working  pred=card_not_working
+  [OK] true=exchange_rate  pred=exchange_rate
+finetuned:  52%|█████▏    | 13/25 [00:18<00:17,  1.45s/it]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=fiat_currency_support  pred=fiat_currency_support
+  [OK] true=pending_card_payment  pred=pending_card_payment
+  [OK] true=terminate_account  pred=terminate_account
+  [OK] true=disposable_card_limits  pred=disposable_card_limits
+  [MISS] true=declined_transfer  pred=declined_card_payment
+  [OK] true=reverted_card_payment?  pred=reverted_card_payment?
+  [OK] true=pin_blocked  pred=pin_blocked
+  [OK] true=exchange_charge  pred=exchange_charge
+finetuned:  56%|█████▌    | 14/25 [00:20<00:15,  1.42s/it]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=card_arrival  pred=card_arrival
+  [OK] true=top_up_limits  pred=top_up_limits
+  [OK] true=cash_withdrawal_charge  pred=cash_withdrawal_charge
+  [MISS] true=balance_not_updated_after_cheque_or_cash_deposit  pred=top_up_by_cash_or_cheque
+  [OK] true=visa_or_mastercard  pred=visa_or_mastercard
+  [OK] true=top_up_reverted  pred=top_up_reverted
+  [OK] true=card_acceptance  pred=card_acceptance
+  [OK] true=apple_pay_or_google_pay  pred=apple_pay_or_google_pay
+finetuned:  60%|██████    | 15/25 [00:21<00:14,  1.47s/it]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=wrong_amount_of_cash_received  pred=wrong_amount_of_cash_received
+  [OK] true=top_up_limits  pred=top_up_limits
+  [OK] true=age_limit  pred=age_limit
+  [OK] true=cancel_transfer  pred=cancel_transfer
+  [OK] true=pending_cash_withdrawal  pred=pending_cash_withdrawal
+  [OK] true=visa_or_mastercard  pred=visa_or_mastercard
+  [OK] true=why_verify_identity  pred=why_verify_identity
+  [OK] true=request_refund  pred=request_refund
+finetuned:  64%|██████▍   | 16/25 [00:23<00:12,  1.43s/it]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=activate_my_card  pred=activate_my_card
+  [OK] true=getting_spare_card  pred=getting_spare_card
+  [OK] true=card_about_to_expire  pred=card_about_to_expire
+  [OK] true=supported_cards_and_currencies  pred=supported_cards_and_currencies
+  [OK] true=cash_withdrawal_charge  pred=cash_withdrawal_charge
+  [OK] true=lost_or_stolen_card  pred=lost_or_stolen_card
+  [OK] true=verify_my_identity  pred=verify_my_identity
+  [MISS] true=top_up_by_card_charge  pred=supported_cards_and_currencies
+finetuned:  68%|██████▊   | 17/25 [00:24<00:11,  1.41s/it]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [MISS] true=compromised_card  pred=card_payment_not_recognised
+  [OK] true=top_up_by_cash_or_cheque  pred=top_up_by_cash_or_cheque
+  [OK] true=cash_withdrawal_not_recognised  pred=cash_withdrawal_not_recognised
+  [OK] true=card_linking  pred=card_linking
+  [MISS] true=pending_transfer  pred=transfer_timing
+  [OK] true=card_delivery_estimate  pred=card_delivery_estimate
+  [OK] true=getting_virtual_card  pred=getting_virtual_card
+  [OK] true=balance_not_updated_after_cheque_or_cash_deposit  pred=balance_not_updated_after_cheque_or_cash_deposit
+finetuned:  72%|███████▏  | 18/25 [00:26<00:10,  1.50s/it]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=top_up_by_card_charge  pred=top_up_by_card_charge
+  [OK] true=terminate_account  pred=terminate_account
+  [OK] true=declined_cash_withdrawal  pred=declined_cash_withdrawal
+  [OK] true=card_delivery_estimate  pred=card_delivery_estimate
+  [OK] true=transfer_fee_charged  pred=transfer_fee_charged
+  [OK] true=card_not_working  pred=card_not_working
+  [OK] true=edit_personal_details  pred=edit_personal_details
+  [OK] true=transaction_charged_twice  pred=transaction_charged_twice
+finetuned:  76%|███████▌  | 19/25 [00:27<00:08,  1.48s/it]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=card_linking  pred=card_linking
+  [OK] true=pending_top_up  pred=pending_top_up
+  [MISS] true=unable_to_verify_identity  pred=passcode_forgotten
+  [OK] true=activate_my_card  pred=activate_my_card
+  [OK] true=extra_charge_on_statement  pred=extra_charge_on_statement
+  [OK] true=card_payment_not_recognised  pred=card_payment_not_recognised
+  [OK] true=order_physical_card  pred=order_physical_card
+  [OK] true=verify_my_identity  pred=verify_my_identity
+finetuned:  80%|████████  | 20/25 [00:29<00:07,  1.47s/it]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=top_up_failed  pred=top_up_failed
+  [OK] true=verify_top_up  pred=verify_top_up
+  [OK] true=card_payment_fee_charged  pred=card_payment_fee_charged
+  [OK] true=supported_cards_and_currencies  pred=supported_cards_and_currencies
+  [OK] true=declined_card_payment  pred=declined_card_payment
+  [OK] true=card_acceptance  pred=card_acceptance
+  [OK] true=age_limit  pred=age_limit
+  [OK] true=failed_transfer  pred=failed_transfer
+finetuned:  84%|████████▍ | 21/25 [00:30<00:05,  1.43s/it]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [MISS] true=disposable_card_limits  pred=get_disposable_virtual_card
+  [OK] true=declined_cash_withdrawal  pred=declined_cash_withdrawal
+  [OK] true=unable_to_verify_identity  pred=unable_to_verify_identity
+  [OK] true=verify_my_identity  pred=verify_my_identity
+  [OK] true=direct_debit_payment_not_recognised  pred=direct_debit_payment_not_recognised
+  [OK] true=age_limit  pred=age_limit
+  [OK] true=atm_support  pred=atm_support
+  [OK] true=card_swallowed  pred=card_swallowed
+finetuned:  88%|████████▊ | 22/25 [00:32<00:04,  1.48s/it]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=transfer_into_account  pred=transfer_into_account
+  [OK] true=lost_or_stolen_phone  pred=lost_or_stolen_phone
+  [OK] true=automatic_top_up  pred=automatic_top_up
+  [OK] true=terminate_account  pred=terminate_account
+  [OK] true=contactless_not_working  pred=contactless_not_working
+  [OK] true=transfer_timing  pred=transfer_timing
+  [MISS] true=order_physical_card  pred=card_arrival
+  [OK] true=why_verify_identity  pred=why_verify_identity
+finetuned:  92%|█████████▏| 23/25 [00:33<00:02,  1.43s/it]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [OK] true=verify_source_of_funds  pred=verify_source_of_funds
+  [OK] true=cash_withdrawal_not_recognised  pred=cash_withdrawal_not_recognised
+  [OK] true=card_payment_wrong_exchange_rate  pred=card_payment_wrong_exchange_rate
+  [OK] true=extra_charge_on_statement  pred=extra_charge_on_statement
+  [OK] true=card_payment_fee_charged  pred=card_payment_fee_charged
+  [OK] true=top_up_by_cash_or_cheque  pred=top_up_by_cash_or_cheque
+  [OK] true=transfer_timing  pred=transfer_timing
+  [OK] true=transaction_charged_twice  pred=transaction_charged_twice
+finetuned:  96%|█████████▌| 24/25 [00:35<00:01,  1.49s/it]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+  [MISS] true=wrong_amount_of_cash_received  pred=declined_cash_withdrawal
+  [OK] true=virtual_card_not_working  pred=virtual_card_not_working
+  [OK] true=top_up_by_bank_transfer_charge  pred=top_up_by_bank_transfer_charge
+  [OK] true=card_swallowed  pred=card_swallowed
+  [OK] true=card_payment_fee_charged  pred=card_payment_fee_charged
+  [OK] true=direct_debit_payment_not_recognised  pred=direct_debit_payment_not_recognised
+  [OK] true=balance_not_updated_after_cheque_or_cash_deposit  pred=balance_not_updated_after_cheque_or_cash_deposit
+  [OK] true=card_swallowed  pred=card_swallowed
+finetuned: 100%|██████████| 25/25 [00:36<00:00,  1.47s/it]
+>>> finetuned accuracy: 0.9000 (180/200)
+
+                                                  precision    recall  f1-score   support
+
+                           Refund_not_showing_up     1.0000    1.0000    1.0000         2
+                                activate_my_card     1.0000    1.0000    1.0000         3
+                                       age_limit     1.0000    1.0000    1.0000         3
+                         apple_pay_or_google_pay     1.0000    1.0000    1.0000         3
+                                     atm_support     1.0000    1.0000    1.0000         2
+                                automatic_top_up     1.0000    0.6667    0.8000         3
+         balance_not_updated_after_bank_transfer     0.0000    0.0000    0.0000         2
+balance_not_updated_after_cheque_or_cash_deposit     1.0000    0.6667    0.8000         3
+                         beneficiary_not_allowed     1.0000    0.6667    0.8000         3
+                                 cancel_transfer     1.0000    1.0000    1.0000         3
+                            card_about_to_expire     1.0000    1.0000    1.0000         3
+                                 card_acceptance     1.0000    1.0000    1.0000         3
+                                    card_arrival     0.5000    1.0000    0.6667         2
+                          card_delivery_estimate     1.0000    0.6667    0.8000         3
+                                    card_linking     1.0000    1.0000    1.0000         3
+                                card_not_working     1.0000    1.0000    1.0000         3
+                        card_payment_fee_charged     1.0000    1.0000    1.0000         3
+                     card_payment_not_recognised     0.6667    1.0000    0.8000         2
+                card_payment_wrong_exchange_rate     1.0000    1.0000    1.0000         3
+                                  card_swallowed     1.0000    1.0000    1.0000         3
+                          cash_withdrawal_charge     1.0000    1.0000    1.0000         3
+                  cash_withdrawal_not_recognised     1.0000    1.0000    1.0000         3
+                                      change_pin     1.0000    1.0000    1.0000         3
+                                compromised_card     1.0000    0.5000    0.6667         2
+                         contactless_not_working     1.0000    1.0000    1.0000         2
+                                 country_support     0.7500    1.0000    0.8571         3
+                           declined_card_payment     0.6000    1.0000    0.7500         3
+                        declined_cash_withdrawal     0.7500    1.0000    0.8571         3
+                               declined_transfer     1.0000    0.3333    0.5000         3
+             direct_debit_payment_not_recognised     1.0000    1.0000    1.0000         2
+                          disposable_card_limits     0.5000    0.5000    0.5000         2
+                           edit_personal_details     1.0000    1.0000    1.0000         3
+                                 exchange_charge     1.0000    1.0000    1.0000         3
+                                   exchange_rate     1.0000    1.0000    1.0000         2
+                                exchange_via_app     1.0000    1.0000    1.0000         1
+                       extra_charge_on_statement     1.0000    1.0000    1.0000         2
+                                 failed_transfer     1.0000    1.0000    1.0000         3
+                           fiat_currency_support     1.0000    1.0000    1.0000         3
+                     get_disposable_virtual_card     0.5000    0.5000    0.5000         2
+                               get_physical_card     1.0000    1.0000    1.0000         3
+                              getting_spare_card     1.0000    1.0000    1.0000         2
+                            getting_virtual_card     1.0000    1.0000    1.0000         3
+                             lost_or_stolen_card     1.0000    1.0000    1.0000         3
+                            lost_or_stolen_phone     0.5000    1.0000    0.6667         1
+                             order_physical_card     1.0000    0.3333    0.5000         3
+                              passcode_forgotten     0.7500    1.0000    0.8571         3
+                            pending_card_payment     1.0000    0.6667    0.8000         3
+                         pending_cash_withdrawal     1.0000    1.0000    1.0000         3
+                                  pending_top_up     1.0000    1.0000    1.0000         3
+                                pending_transfer     0.5000    0.5000    0.5000         2
+                                     pin_blocked     1.0000    1.0000    1.0000         2
+                                 receiving_money     1.0000    1.0000    1.0000         3
+                                  request_refund     1.0000    1.0000    1.0000         2
+                          reverted_card_payment?     1.0000    1.0000    1.0000         2
+                  supported_cards_and_currencies     0.7500    1.0000    0.8571         3
+                               terminate_account     1.0000    1.0000    1.0000         3
+                  top_up_by_bank_transfer_charge     1.0000    0.6667    0.8000         3
+                           top_up_by_card_charge     1.0000    0.6667    0.8000         3
+                        top_up_by_cash_or_cheque     0.7500    1.0000    0.8571         3
+                                   top_up_failed     0.5000    1.0000    0.6667         2
+                                   top_up_limits     1.0000    1.0000    1.0000         3
+                                 top_up_reverted     1.0000    0.6667    0.8000         3
+                              topping_up_by_card     1.0000    1.0000    1.0000         1
+                       transaction_charged_twice     1.0000    1.0000    1.0000         2
+                            transfer_fee_charged     0.7500    1.0000    0.8571         3
+                           transfer_into_account     1.0000    1.0000    1.0000         3
+              transfer_not_received_by_recipient     0.6000    1.0000    0.7500         3
+                                 transfer_timing     0.6667    1.0000    0.8000         2
+                       unable_to_verify_identity     1.0000    0.6667    0.8000         3
+                              verify_my_identity     1.0000    1.0000    1.0000         3
+                          verify_source_of_funds     1.0000    1.0000    1.0000         2
+                                   verify_top_up     1.0000    1.0000    1.0000         2
+                        virtual_card_not_working     1.0000    1.0000    1.0000         2
+                              visa_or_mastercard     1.0000    1.0000    1.0000         3
+                             why_verify_identity     1.0000    1.0000    1.0000         2
+                   wrong_amount_of_cash_received     1.0000    0.6667    0.8000         3
+         wrong_exchange_rate_for_cash_withdrawal     1.0000    1.0000    1.0000         2
+
+                                        accuracy                         0.9000       200
+                                       macro avg     0.9095    0.9004    0.8884       200
+                                    weighted avg     0.9213    0.9000    0.8940       200
+
+
+/usr/local/lib/python3.12/dist-packages/sklearn/metrics/_classification.py:1565: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/usr/local/lib/python3.12/dist-packages/sklearn/metrics/_classification.py:1565: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/usr/local/lib/python3.12/dist-packages/sklearn/metrics/_classification.py:1565: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+VRAM freed: 0.11GB used
+=== SUMMARY ===
+  zero_shot    0.6800  (68.00%)
+  finetuned    0.9000  (90.00%)

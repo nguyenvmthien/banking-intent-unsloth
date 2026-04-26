@@ -1,0 +1,162 @@
+ Unsloth: Will patch your computer to enable 2x faster free finetuning.
+Unsloth: Your Flash Attention 2 installation seems to be broken. Using Xformers instead. No performance changes will be seen.
+🦥 Unsloth Zoo will now patch everything to make training faster!
+
+/tmp/ipykernel_1320/1419447972.py:11: DeprecationWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  .apply(lambda g: g.sample(min(1, len(g)), random_state=42))
+
+Sampled 20 rows across 20 intents
+[ZERO_SHOT] Loading model: unsloth/Qwen3-8B
+==((====))==  Unsloth 2026.4.8: Fast Qwen3 patching. Transformers: 5.5.0.
+   \\   /|    NVIDIA A100-SXM4-40GB. Num GPUs = 1. Max memory: 39.494 GB. Platform: Linux.
+O^O/ \_/ \    Torch: 2.10.0+cu128. CUDA: 8.0. CUDA Toolkit: 12.8. Triton: 3.6.0
+\        /    Bfloat16 = TRUE. FA [Xformers = None. FA2 = False]
+ "-____-"     Free license: http://github.com/unslothai/unsloth
+Unsloth: Fast downloading is enabled - ignore downloading bars which are red colored!
+
+model.safetensors.index.json: 
+ 144k/? [00:00<00:00, 13.2MB/s]
+Download complete: 100%
+ 7.48G/7.48G [00:22<00:00, 388MB/s]
+Fetching 2 files: 100%
+ 2/2 [00:22<00:00, 22.58s/it]
+Loading weights: 100%
+ 399/399 [00:01<00:00, 316.96it/s]
+generation_config.json: 100%
+ 237/237 [00:00<00:00, 29.5kB/s]
+config.json: 
+ 1.53k/? [00:00<00:00, 150kB/s]
+tokenizer_config.json: 
+ 10.5k/? [00:00<00:00, 1.19MB/s]
+vocab.json: 
+ 2.78M/? [00:00<00:00, 11.6MB/s]
+merges.txt: 
+ 1.67M/? [00:00<00:00, 2.11MB/s]
+tokenizer.json: 100%
+ 11.4M/11.4M [00:00<00:00, 57.3MB/s]
+added_tokens.json: 100%
+ 707/707 [00:00<00:00, 94.2kB/s]
+special_tokens_map.json: 100%
+ 614/614 [00:00<00:00, 73.2kB/s]
+chat_template.jinja: 
+ 4.67k/? [00:00<00:00, 495kB/s]
+
+unsloth/qwen3-8b-unsloth-bnb-4bit does not have a padding token! Will use pad_token = <|PAD_TOKEN|>.
+LangSmith tracing disabled.
+
+zero_shot:   0%|          | 0/3 [00:00<?, ?it/s]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:71: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:281: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:172: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:202: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:254: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:71: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:281: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:202: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:254: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+zero_shot:  33%|███▎      | 1/3 [00:40<01:20, 40.32s/it]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+
+  [OK] true=atm_support  pred=atm_support
+  [OK] true=extra_charge_on_statement  pred=extra_charge_on_statement
+  [MISS] true=card_about_to_expire  pred=order_physical_card
+  [OK] true=Refund_not_showing_up  pred=Refund_not_showing_up
+  [OK] true=passcode_forgotten  pred=passcode_forgotten
+  [MISS] true=pending_cash_withdrawal  pred=wrong_exchange_rate_for_cash_withdrawal
+  [OK] true=transfer_not_received_by_recipient  pred=transfer_not_received_by_recipient
+  [OK] true=reverted_card_payment?  pred=reverted_card_payment?
+
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:172: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+zero_shot:  67%|██████▋   | 2/3 [00:58<00:27, 27.57s/it]Both `max_new_tokens` (=512) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+
+  [OK] true=pin_blocked  pred=pin_blocked
+  [MISS] true=declined_transfer  pred=declined_card_payment
+  [OK] true=unable_to_verify_identity  pred=unable_to_verify_identity
+  [OK] true=why_verify_identity  pred=why_verify_identity
+  [MISS] true=card_payment_wrong_exchange_rate  pred=exchange_rate
+  [OK] true=card_arrival  pred=card_arrival
+  [OK] true=top_up_by_cash_or_cheque  pred=top_up_by_cash_or_cheque
+  [OK] true=exchange_rate  pred=exchange_rate
+
+zero_shot: 100%|██████████| 3/3 [01:19<00:00, 26.46s/it]
+
+  [OK] true=cancel_transfer  pred=cancel_transfer
+  [MISS] true=automatic_top_up  pred=top_up_limits
+  [MISS] true=exchange_via_app  pred=fiat_currency_support
+  [OK] true=change_pin  pred=change_pin
+
+>>> zero_shot accuracy: 0.70 (14/20)
+
+[FINETUNED] Loading model: ../outputs/checkpoint
+
+
+==((====))==  Unsloth 2026.4.8: Fast Qwen3 patching. Transformers: 5.5.0.
+   \\   /|    NVIDIA A100-SXM4-40GB. Num GPUs = 1. Max memory: 39.494 GB. Platform: Linux.
+O^O/ \_/ \    Torch: 2.10.0+cu128. CUDA: 8.0. CUDA Toolkit: 12.8. Triton: 3.6.0
+\        /    Bfloat16 = TRUE. FA [Xformers = None. FA2 = False]
+ "-____-"     Free license: http://github.com/unslothai/unsloth
+Unsloth: Fast downloading is enabled - ignore downloading bars which are red colored!
+
+Loading weights: 100%
+ 399/399 [00:02<00:00, 259.48it/s]
+
+unsloth/qwen3-8b-unsloth-bnb-4bit does not have a padding token! Will use pad_token = <|PAD_TOKEN|>.
+
+Unsloth 2026.4.8 patched 36 layers with 0 QKV layers, 0 O layers and 0 MLP layers.
+
+LangSmith tracing disabled.
+
+finetuned:   0%|          | 0/3 [00:00<?, ?it/s]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:71: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:281: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:172: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:202: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+/usr/local/lib/python3.12/dist-packages/transformers/modeling_attn_mask_utils.py:254: FutureWarning: The attention mask API under `transformers.modeling_attn_mask_utils` (`AttentionMaskConverter`) is deprecated and will be removed in Transformers v5.10. Please use the new API in `transformers.masking_utils`.
+  warnings.warn(DEPRECATION_MESSAGE, FutureWarning)
+finetuned:  33%|███▎      | 1/3 [00:01<00:03,  1.57s/it]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+
+  [OK] true=atm_support  pred=atm_support
+  [OK] true=extra_charge_on_statement  pred=extra_charge_on_statement
+  [OK] true=card_about_to_expire  pred=card_about_to_expire
+  [OK] true=Refund_not_showing_up  pred=Refund_not_showing_up
+  [OK] true=passcode_forgotten  pred=passcode_forgotten
+  [OK] true=pending_cash_withdrawal  pred=pending_cash_withdrawal
+  [OK] true=transfer_not_received_by_recipient  pred=transfer_not_received_by_recipient
+  [OK] true=reverted_card_payment?  pred=reverted_card_payment?
+
+finetuned:  67%|██████▋   | 2/3 [00:03<00:01,  1.56s/it]Both `max_new_tokens` (=32) and `max_length`(=40960) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+
+  [OK] true=pin_blocked  pred=pin_blocked
+  [MISS] true=declined_transfer  pred=declined_card_payment
+  [OK] true=unable_to_verify_identity  pred=unable_to_verify_identity
+  [OK] true=why_verify_identity  pred=why_verify_identity
+  [OK] true=card_payment_wrong_exchange_rate  pred=card_payment_wrong_exchange_rate
+  [OK] true=card_arrival  pred=card_arrival
+  [OK] true=top_up_by_cash_or_cheque  pred=top_up_by_cash_or_cheque
+  [OK] true=exchange_rate  pred=exchange_rate
+
+finetuned: 100%|██████████| 3/3 [00:04<00:00,  1.36s/it]
+
+  [OK] true=cancel_transfer  pred=cancel_transfer
+  [MISS] true=automatic_top_up  pred=top_up_limits
+  [OK] true=exchange_via_app  pred=exchange_via_app
+  [OK] true=change_pin  pred=change_pin
+
+>>> finetuned accuracy: 0.90 (18/20)
+
+=== SUMMARY ===
+  zero_shot    0.70
+  finetuned    0.90

@@ -1,6 +1,7 @@
 # Secrets — never commit
 .env
 configs/inference.yaml.local
+present_script.md
 
 # Model weights & checkpoints
 outputs/
