@@ -14,7 +14,6 @@ Required interface (per assignment spec):
 import os
 import re
 import yaml
-import pandas as pd
 import torch
 from difflib import get_close_matches
 from unsloth import FastLanguageModel
@@ -107,40 +106,44 @@ def _match_label(generated: str) -> str:
     return INTENT_LABELS[0]
 
 
+def _strip_thinking(text: str) -> str:
+    """Strip Qwen3 thinking blocks in both <think> and [think] bracket forms."""
+    # Closed tags first, then unclosed (when </think> was a special token and got stripped)
+    text = re.sub(r"(<think>|\[think\]).*?(</think>|\[/think\])", "", text, flags=re.DOTALL)
+    text = re.sub(r"(<think>|\[think\]).*", "", text, flags=re.DOTALL)
+    # Remove residual special tokens from skip_special_tokens=False decoding
+    text = re.sub(r"<\|[^|]*\|>", "", text)
+    return text.strip()
+
+
 class IntentClassification:
     """
     Banking intent classifier — loads a Qwen3-8B (LoRA fine-tuned) model
     and classifies a customer message into one of 77 Banking77 intent labels.
 
-    Supports three inference modes configured via inference.yaml:
+    Supports two inference modes configured via inference.yaml:
       - finetuned  (default): LoRA-adapted model
       - zero_shot : base model, no examples
-      - few_shot  : base model + k examples in system prompt
 
     Usage:
         clf = IntentClassification("configs/inference.yaml")
         label = clf("I lost my card, how do I order a new one?")
     """
 
-    def __init__(self, model_path: str, mode: str = "finetuned",
-                 few_shot_k: int = 5, few_shot_data_path: str = None):
+    def __init__(self, model_path: str, mode: str = "finetuned"):
         """
         Args:
             model_path: Path to inference.yaml config file.
-            mode: One of "finetuned", "zero_shot", "few_shot".
-            few_shot_k: Number of examples to use in few_shot mode.
-            few_shot_data_path: Optional path to train.csv for few-shot sampling.
+            mode: One of "finetuned", "zero_shot".
         """
-        if mode not in ("zero_shot", "few_shot", "finetuned"):
-            raise ValueError(f"Invalid mode: {mode!r}. Choose from: zero_shot, few_shot, finetuned")
+        if mode not in ("zero_shot", "finetuned"):
+            raise ValueError(f"Invalid mode: {mode!r}. Choose from: zero_shot, finetuned")
 
         with open(model_path) as f:
             self.config = yaml.safe_load(f)
 
         self.config_dir = os.path.dirname(os.path.abspath(model_path))
         self.mode = mode
-        self.few_shot_k = few_shot_k
-        self.few_shot_examples: list[tuple[str, str]] = []
 
         checkpoint = (
             self.config["model_path"] if mode == "finetuned"
@@ -156,26 +159,13 @@ class IntentClassification:
         )
         FastLanguageModel.for_inference(self.model)
 
-        if mode == "few_shot":
-            self._load_few_shot_examples(few_shot_data_path)
+        # Left padding is required for batched generation — decoder models generate
+        # from the last token of each input, so padding must be on the left side.
+        self.tokenizer.padding_side = "left"
+        if self.tokenizer.pad_token is None:
+            self.tokenizer.pad_token = self.tokenizer.eos_token
 
         self._setup_langsmith()
-
-    def _load_few_shot_examples(self, data_path: str = None):
-        """Sample one example per intent from train.csv to build the few-shot pool."""
-        if data_path is None:
-            data_path = os.path.normpath(
-                os.path.join(self.config_dir, "../sample_data/train.csv")
-            )
-        df = pd.read_csv(data_path)
-        sampled = (
-            df.groupby("intent_name")
-            .apply(lambda g: g.sample(1, random_state=42))
-            .reset_index(drop=True)
-            .sample(min(self.few_shot_k, df["intent_name"].nunique()), random_state=42)
-        )
-        self.few_shot_examples = list(zip(sampled["text"], sampled["intent_name"]))
-        print(f"Loaded {len(self.few_shot_examples)} few-shot examples.")
 
     def _setup_langsmith(self):
         """Enable LangSmith tracing if an API key is available in env or config."""
@@ -190,53 +180,71 @@ class IntentClassification:
             print("LangSmith tracing disabled.")
 
     def _build_messages(self, user_text: str) -> list[dict]:
-        """Build the chat message list, optionally prepending few-shot examples."""
-        system = SYSTEM_PROMPT
-        if self.mode == "few_shot" and self.few_shot_examples:
-            examples_str = "\n".join(
-                f"User: {text}\nLabel: {label}"
-                for text, label in self.few_shot_examples
-            )
-            system = system + "\n\nExamples:\n" + examples_str
+        """Build the chat message list for the given user text."""
         return [
-            {"role": "system", "content": system},
+            {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": user_text},
         ]
 
-    @traceable(name="predict_intent")
-    def predict(self, message: str) -> dict:
-        """Run inference and return a dict with input, raw_output, and label."""
-        messages = self._build_messages(message)
+    def _max_new_tokens(self) -> int:
+        """Return max_new_tokens appropriate for current mode."""
+        if self.mode == "finetuned":
+            # Fine-tuned model outputs the label directly without thinking
+            return self.config.get("max_new_tokens_finetuned", 32)
+        # Base model uses thinking — needs enough tokens to finish the thinking
+        # block before reaching the label
+        return self.config.get("max_new_tokens", 512)
 
-        inputs = self.tokenizer.apply_chat_template(
-            messages,
-            tokenize=True,
-            add_generation_prompt=True,
+    def predict_batch(self, messages: list[str]) -> list[dict]:
+        """Run batched inference on a list of messages. Returns a list of result dicts."""
+        # Apply chat template per sample → list of formatted strings
+        formatted = [
+            self.tokenizer.apply_chat_template(
+                self._build_messages(msg),
+                tokenize=False,
+                add_generation_prompt=True,
+            )
+            for msg in messages
+        ]
+
+        # Tokenize together with left-padding so all inputs end at the same position
+        inputs = self.tokenizer(
+            formatted,
             return_tensors="pt",
+            padding=True,
+            truncation=True,
+            max_length=self.config["max_seq_length"],
         ).to("cuda")
 
         with torch.no_grad():
             outputs = self.model.generate(
-                inputs,
-                max_new_tokens=self.config.get("max_new_tokens", 512),
+                input_ids=inputs["input_ids"],
+                attention_mask=inputs["attention_mask"],
+                max_new_tokens=self._max_new_tokens(),
                 do_sample=False,
                 pad_token_id=self.tokenizer.eos_token_id,
             )
 
-        new_tokens = outputs[0][inputs.shape[-1]:]
-        # Decode with skip_special_tokens=False so both <think> and </think> are
-        # preserved as text — prevents asymmetric stripping where one tag survives
-        # and the closing-tag regex wipes everything including the label.
-        raw_output = self.tokenizer.decode(new_tokens, skip_special_tokens=False).strip()
+        # All inputs were left-padded to the same length, so new tokens start at
+        # the same offset for every sample in the batch.
+        input_len = inputs["input_ids"].shape[1]
+        results = []
+        for i, msg in enumerate(messages):
+            new_tokens = outputs[i][input_len:]
+            # Decode with skip_special_tokens=False to preserve <think>/<think> tags
+            # symmetrically — avoids the case where only one tag survives and the
+            # unclosed-tag regex wipes everything including the label.
+            raw_output = self.tokenizer.decode(new_tokens, skip_special_tokens=False)
+            raw_output = _strip_thinking(raw_output)
+            label = _match_label(raw_output)
+            results.append({"input": msg, "raw_output": raw_output, "label": label})
 
-        # Strip Qwen3 thinking blocks (closed then unclosed, angle and bracket forms).
-        raw_output = re.sub(r"(<think>|\[think\]).*?(</think>|\[/think\])", "", raw_output, flags=re.DOTALL)
-        raw_output = re.sub(r"(<think>|\[think\]).*", "", raw_output, flags=re.DOTALL)
-        # Remove any residual special tokens left by skip_special_tokens=False
-        raw_output = re.sub(r"<\|[^|]*\|>", "", raw_output).strip()
+        return results
 
-        label = _match_label(raw_output)
-        return {"input": message, "raw_output": raw_output, "label": label}
+    @traceable(name="predict_intent")
+    def predict(self, message: str) -> dict:
+        """Run inference on a single message. Returns a dict with input, raw_output, and label."""
+        return self.predict_batch([message])[0]
 
     def __call__(self, message: str) -> str:
         """Classify a single banking customer message. Returns a Banking77 label string."""

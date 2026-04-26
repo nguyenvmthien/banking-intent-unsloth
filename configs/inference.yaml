@@ -7,9 +7,15 @@ model_path: "../outputs/checkpoint"
 max_seq_length: 2048
 load_in_4bit: true
 
-# Generation — must be large enough for Qwen3 to finish its thinking block
-# before outputting the label (thinking alone can consume hundreds of tokens).
+# Generation tokens for zero_shot / few_shot (base model uses thinking — needs room
+# to finish the thinking block before outputting the label).
 max_new_tokens: 512
+
+# Generation tokens for finetuned mode — fine-tuned model outputs the label directly.
+max_new_tokens_finetuned: 32
+
+# Batch size for evaluate.py — reduce if OOM, increase for faster evaluation.
+batch_size: 8
 
 # LangSmith
 langsmith_api_key: "YOUR KEY HERE"
