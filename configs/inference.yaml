@@ -1,0 +1,15 @@
+# Base model (zero_shot / few_shot modes)
+model_name: "unsloth/Qwen3-8B"
+
+# Fine-tuned adapter (finetuned mode) — update after training
+model_path: "../outputs/checkpoint"
+
+max_seq_length: 2048
+load_in_4bit: true
+
+# Generation — max_new_tokens covers label text only (thinking tokens stripped at decode)
+max_new_tokens: 64
+
+# LangSmith
+langsmith_api_key: "YOUR KEY HERE"
+langsmith_project: "banking-intent-v2"

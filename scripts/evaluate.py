@@ -56,11 +56,10 @@ def main():
     parser.add_argument("--few_shot_k", type=int, default=5)
     args = parser.parse_args()
 
-    config_path = "../configs/inference.yaml"
-    test_data_path = "../sample_data/test.csv"
-    if not os.path.exists(config_path):
-        config_path = "configs/inference.yaml"
-        test_data_path = "sample_data/test.csv"
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    repo_root = os.path.dirname(script_dir)
+    config_path = os.path.join(repo_root, "configs", "inference.yaml")
+    test_data_path = os.path.join(repo_root, "sample_data", "test.csv")
 
     df = pd.read_csv(test_data_path)
     modes = ["zero_shot", "few_shot", "finetuned"] if args.mode == "all" else [args.mode]
