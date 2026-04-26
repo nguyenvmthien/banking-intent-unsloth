@@ -1,5 +1,5 @@
 """
-Evaluate IntentClassifier on the Banking77 test set.
+Evaluate IntentClassification on the Banking77 test set.
 Supports zero_shot, few_shot, finetuned, and all modes.
 LangSmith traces each prediction when LANGSMITH_API_KEY is set.
 """
@@ -15,7 +15,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from inference import IntentClassification
 
 
-def run_evaluation(classifier: IntentClassifier, df: pd.DataFrame, label: str) -> float:
+def run_evaluation(classifier: IntentClassification, df: pd.DataFrame, label: str) -> float:
     y_true = df["intent_name"].tolist()
     y_pred = []
     previews = []
